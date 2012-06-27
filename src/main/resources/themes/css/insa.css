@@ -1,0 +1,19 @@
+/* Placeholder for custom CSS */
+.mainTabs li.selected {background-color:#ffffff;}
+.mainTabs li.selected a {color:black;font-weight: bold;}
+.mainTabs li:hover {background-color:#ffffff;}
+.mainTabs li a:hover {color:black;font-weight: bold;}
+.mainTabs li a {font-weight: bold;}
+
+.userMenuActions ul:hover a {font-weight: bold;}
+.userMenuActions ul li a {font-weight: bold;}
+
+.studioButton a {font-weight: bold;}
+
+.nxHeader .logo {text-align:left;}
+
+a.twitter {background:transparent url(/nuxeo/icons/icones-metanav.png) no-repeat left bottom;display:inline-block;height:16px;margin:0 0.4em;width:16px;}
+a.fbook {background:transparent url(/nuxeo/icons/facebook.png) no-repeat left top;display:inline-block;height:16px;margin:0 0.4em;width:16px;}
+a.youtube {background:transparent url(/nuxeo/icons/you_tube.png) no-repeat left top;display:inline-block;height:16px;margin:0 0.4em;width:16px;}
+
+.nxMainContainer .column .dropzone {display:none;}

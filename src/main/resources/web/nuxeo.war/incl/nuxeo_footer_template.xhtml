@@ -1,0 +1,54 @@
+<f:subview xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:c="http://java.sun.com/jstl/core"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:insert name="prefooter">
+  <c:if test="#{connectUpdateStatusInfo.bannerPath!=null}">
+     <ui:include src="#{connectUpdateStatusInfo.bannerPath}"/>
+  </c:if>
+</ui:insert>
+
+<ui:insert name="footer">
+  <div class="footerDefaultLinks">
+		<div class="nuxLinks">
+		<h:outputLink onclick="window.open(this.href); return false;" value="http://www.insa-toulouse.fr">
+			<h:outputText value="#{messages['label.footer.webInsa']}" />
+		</h:outputLink> | <!-- &nbsp; -->
+		<h:outputLink onclick="window.open(this.href); return false;" value="https://ent.insa-toulouse.fr">
+			<h:outputText value="#{messages['label.footer.entInsa']}" />
+		</h:outputLink> | <!-- &nbsp; -->
+		<h:outputLink class="twitter" onclick="window.open(this.href); return false;" value="https://twitter.com/#!/INSAToulouse">
+		  <h:outputText value="Twitter" style="display:none;"/>
+		</h:outputLink><!-- &nbsp; -->
+		<h:outputLink class="fbook" onclick="window.open(this.href); return false;" value="https://www.facebook.com/INSAToulouse">
+                  <h:outputText value="Facebook" style="display:none;"/>
+                </h:outputLink><!-- &nbsp; -->
+		<h:outputLink class="youtube" onclick="window.open(this.href); return false;" value="http://www.youtube.com/user/InsaToulouse">
+                  <h:outputText value="YouTube" style="display:none;"/>
+                </h:outputLink><!-- &nbsp; -->
+		</div>
+
+		<div class="copyrights">
+		 <h:outputText value="#{messages['label.login.copyright']}" />
+		</div>
+		<div class="clear"></div>
+	</div>
+
+<c:if test="false">
+  NXP-3151: move language selector to login page
+  <h:form id="langSelectForm">
+    <h:outputText value="#{messages['label.selectLocale']}" />
+    <h:selectOneMenu value="#{localeSelector.localeString}" styleClass="langSelect"
+      id="langSelectMenu">
+      <f:selectItems value="#{localeSelector.supportedLocales}"/>
+    </h:selectOneMenu>
+    <h:commandButton action="#{localeSelector.select}"
+                     value="#{messages['command.changeLocale']}"
+                     class="langSubmit"
+                     id="langSelectSubmitButton" />
+  </h:form>
+</c:if>
+
+</ui:insert>
+</f:subview>

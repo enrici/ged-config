@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<component name="fr.insa.ged.config.actions">
+	<require>org.nuxeo.ecm.platform.actions</require>
+	<!-- Suppression de l acces a l espace Personnel et restrictions d acces 
+		a l espace Home -->
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="actions">
+		<!-- Suppression acces espace personnel -->
+		<action id="SHOW_PERSONAL_WORKSPACE" enabled="false" />
+		<!-- Suppression de l'onglet Applications autorisées situe dans le dashboard 
+			de l'utilisateur -->
+		<action id="AuthorizedApplication" enabled="false" />
+		<!-- Suppression de l'onglet Users and Groups situe dans le dashboard de 
+			l'utilisateur -->
+		<action id="UsersGroupsHome" enabled="false" />
+		<!-- Suppression de l'onglet Profile situe dans le dashboard de l'utilisateur -->
+		<action id="Profile" enabled="false" />
+		<!-- Affichage de l'onglet Tableau de Bord si l'utilisateur fait partie 
+			du groupe administrators -->
+		<action icon="/icons/dashboard.png" id="Dashboard" label="user.center.dashboard"
+			link="user_center_fragment.xhtml" order="10">
+			<category>USER_CENTER</category>
+			<!-- filtre d'activation initial -->
+			<filter-id>not_readonly</filter-id>
+
+			<!-- L'onglet ne sera pas affiche pour l'utilisateur anonyme -->
+			<filter-id>not_anonymous</filter-id>
+
+			<!-- Filtre de restriction personnalise -->
+			<filter id="users_group_home_restricted_access">
+				<!-- Affichage si l'utilisateur fait partie du groupe XXX -->
+				<rule grant="true">
+					<condition>#{userSession.currentNuxeoPrincipal.allGroups.contains("administrators")}
+					</condition>
+				</rule>
+			</filter>
+		</action>
+
+		<!-- Suppression des onglets Historique Publication Workflow pour les members -->
+		<action id="TAB_CONTENT_HISTORY">
+			<filter-id>only_for_manager</filter-id>
+		</action>
+		<action id="TAB_PUBLISH">
+			<filter-id>only_for_manager</filter-id>
+		</action>
+		<action id="TAB_CONTENT_JBPM">
+			<filter-id>only_for_manager</filter-id>
+		</action>
+
+		<!-- On grise le bouton Copier et on enleve le bouter Ajouter a la selection 
+			pour les members -->
+		<action id="CURRENT_SELECTION_ADDTOLIST" enabled="false">
+			<filter-id>only_for_manager</filter-id>
+		</action>
+		<action id="CURRENT_SELECTION_COPY">
+			<filter-id>view_section_buttons</filter-id>
+		</action>
+
+
+	</extension>
+
+	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
+		point="filters">
+		<filter id="view_section_buttons">
+			<rule grant="false">
+				<type>DomainCollaborative</type>
+				<type>DomainPublication</type>
+				<type>Section</type>
+			</rule>
+		</filter>
+	</extension>
+</component>

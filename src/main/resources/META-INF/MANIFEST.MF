@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 1
+Bundle-Name: INSA GED CONFIG
+Bundle-SymbolicName: fr.insa.ged.config;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: Nuxeo
+Provide-Package: fr.insa.ged.config
+Require-Bundle: org.nuxeo.runtime,
+ org.nuxeo.ecm.core.api,
+ org.nuxeo.ecm.core,
+ org.nuxeo.ecm.webapp.core
+Nuxeo-Component: OSGI-INF/insa-navtree-contrib.xml,
+ OSGI-INF/insa-actions-contrib.xml,
+ OSGI-INF/insa-layouts-contrib.xml,
+ OSGI-INF/insa-theme-contrib.xml
+

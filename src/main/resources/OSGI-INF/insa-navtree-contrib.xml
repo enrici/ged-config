@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<component name="fr.insa.ged.config.navtree">
+<require>org.nuxeo.ecm.virtualnavigation.directory.DirectoryTreeService.contrib</require>
+	<!-- Suppression des navigations par theme et par couverture geographique -->
+	<extension target="org.nuxeo.ecm.webapp.directory.DirectoryTreeService"
+		point="trees">
+		<directoryTree name="bySubjectsNavigation" enabled="false" />
+		<directoryTree name="byCoverageNavigation" enabled="false" />
+	</extension>
+
+	<!-- Suppression de la navigation par tag -->
+	<extension target="org.nuxeo.ecm.platform.virtualnavigation.NavTreeService"
+		point="navigationTree">
+		<navTree treeId="TAG_CLOUD" enabled="false" />
+	</extension>
+</component>
