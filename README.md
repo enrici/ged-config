@@ -1,4 +1,4 @@
 ged-config
 ==========
 
-GED Config
+This is the GED Config project.
