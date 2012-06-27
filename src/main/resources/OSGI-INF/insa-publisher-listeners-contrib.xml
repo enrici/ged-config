@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<component name="fr.insa.ged.config.publisher.listeners.contrib">
+
+  <require>org.nuxeo.ecm.platform.publisher.listeners.contrib</require>
+
+  <extension target="org.nuxeo.ecm.core.event.EventServiceComponent"
+    point="listener">
+
+    <listener name="domainCreationListener" postCommit="true"
+      class="fr.insa.ged.config.listeners.INSADomainEventsListener" />
+
+  </extension>
+
+</component>
