@@ -1,0 +1,75 @@
+<div class="summary"
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:c="http://java.sun.com/jstl/core"
+  xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+  xmlns:nxdir="http://nuxeo.org/nxdirectory"
+  xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+  xmlns:nxd="http://nuxeo.org/nxweb/document"
+  xmlns:nxh="http://nuxeo.org/nxweb/html"
+  xmlns:nxl="http://nuxeo.org/nxforms/layout"
+  xmlns:nxu="http://nuxeo.org/nxweb/util">
+
+	<c:set var="hasMainBlob" value="#{!empty currentDocumentAsBlobHolder.blob}" />
+	<c:if test="#{hasMainBlob}">
+		<div class="content_block">
+	    <table>
+	      <tbody>
+	        <tr>
+	          <td class="labelColumn">
+	            <h:outputText value="#{messages['label.summary.download.file']}" />
+	          </td>
+	          <td class="fieldColumn" docRef="#{currentDocument.id}">
+	            <div class="dropout"
+	              downloadUrl="#{nxd:fileUrl('downloadFile', currentDocument, 'blobholder:0', currentDocumentAsBlobHolder.blob.filename)}"
+	              fileName="#{currentDocumentAsBlobHolder.blob.filename}"
+	              mimetype="#{currentDocumentAsBlobHolder.blob.mimeType}">
+		            <nxh:outputLink
+		              value="#{nxd:fileUrl('downloadFile', currentDocument, 'blobholder:0', currentDocumentAsBlobHolder.blob.filename)}">
+		              <nxh:graphicImage value="#{nxd:fileIconPath(currentDocumentAsBlobHolder.blob)}"
+		                rendered="#{! empty nxd:fileIconPath(currentDocumentAsBlobHolder.blob)}" />
+		              <h:outputText value="#{currentDocumentAsBlobHolder.blob.filename}"/>
+		              <h:outputText value=" (#{nxu:printFileSize(currentDocumentAsBlobHolder.blob.length)})"/>
+		            </nxh:outputLink>
+	              
+	            </div>
+	          </td>
+	          <td class="actionsColumn">
+	            <nxu:methodResult name="editable"
+	              value="#{liveEditHelper.isDocumentLiveEditable(currentDocument, 'file', 'content')}">
+	              <h:outputLink value="#{nxd:liveEditUrl(currentDocument, 'file', 'content', 'filename')}"
+	                rendered="#{editable}">
+	                <h:graphicImage value="/icons/application_form_edit.png"
+	                  alt="#{messages['label.document.directEdit']}"
+	                  title="#{messages['label.document.directEdit']}"/>
+	              </h:outputLink>
+	            </nxu:methodResult>
+	            <nxu:methodResult name="hasPDFCapabilities"
+	              value="#{conversionActions.isExportableToPDF(currentDocumentAsBlobHolder)}">
+	              <h:panelGroup rendered="#{hasPDFCapabilities}">
+	                <nxh:commandLink
+	                  action="#{conversionActions.generatePdfFileFromBlobHolder(currentDocumentAsBlobHolder)}">
+	                <nxh:graphicImage
+	                  value="/icons/pdf.png"
+	                  title="#{messages['label.document.generatePdf']}"
+	                  alt="#{messages['label.document.generatePdf']}"/>
+	              </nxh:commandLink>
+	              </h:panelGroup>
+	            </nxu:methodResult>
+	          </td>
+	        </tr>
+	      </tbody>
+	    </table>
+		</div>
+
+		<iframe width="100%" height="800" src="#{nxd:fileUrl('downloadFile', currentDocument, 'blobholder:0',currentDocumentAsBolbHolder.blob.filename)}?inline=inline">
+		</iframe>
+	</c:if>
+	<c:if test="#{!hasMainBlob}">
+		<h:outputText value="#{messages['label.document.nofile']}" />
+	</c:if>
+
+
+</div>
