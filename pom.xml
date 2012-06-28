@@ -56,6 +56,10 @@
       <groupId>org.nuxeo.ecm.platform</groupId>
       <artifactId>nuxeo-platform-publisher-core</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.nuxeo.ecm.platform</groupId>
+      <artifactId>nuxeo-platform-publisher-web</artifactId>
+    </dependency>
 
     <!-- Scope test -->
     <dependency>

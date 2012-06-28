@@ -6,8 +6,9 @@
   <extension target="org.nuxeo.ecm.core.event.EventServiceComponent"
     point="listener">
 
-    <listener name="domainCreationListener" postCommit="true"
-      class="fr.insa.ged.config.listeners.INSADomainEventsListener" />
+    <listener name="domainCreationListener" async="false" postCommit="true"
+      class="fr.insa.ged.config.listeners.INSADomainEventsListener"
+      priority="140" />
 
   </extension>
 
