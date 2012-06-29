@@ -55,11 +55,12 @@
 		<action id="TAB_CONTENT_HISTORY">
 			<filter-id>only_for_manager</filter-id>
 		</action>
+		<!-- 
 		<action id="TAB_PUBLISH">
 			<filter-id>documents_visu</filter-id>
 			<filter-id>documents_approved</filter-id>
-			<filter-id>only_for_manager</filter-id>
 		</action>
+		 -->
 		<action id="TAB_CONTENT_JBPM">
 			<filter-id>only_for_manager</filter-id>
 		</action>
