@@ -1,27 +1,30 @@
 <?xml version="1.0"?>
 <component name="fr.insa.ged.config.computedgroups.contrib">
 
-  <extension
-    target="org.nuxeo.ecm.platform.computedgroups.ComputedGroupsServiceImpl"
-    point="computer">
+	<extension
+		target="org.nuxeo.ecm.platform.computedgroups.ComputedGroupsServiceImpl"
+		point="computer">
 
-    <groupComputer name="affiliationGroupComputer">
-      <computer>fr.insa.ged.config.computedgroups.INSAAffiliationGroupComputer
-      </computer>
-    </groupComputer>
+		<groupComputer name="affiliationGroupComputer">
+			<allowOverride>true</allowOverride>
+			<cacheEnable>true</cacheEnable>
+			<cacheTimeout>120</cacheTimeout>
+			<computer>fr.insa.ged.config.computedgroups.INSAAffiliationGroupComputer
+			</computer>
+		</groupComputer>
 
-  </extension>
+	</extension>
 
-  <extension
-    target="org.nuxeo.ecm.platform.computedgroups.ComputedGroupsServiceImpl"
-    point="computerChain">
+	<extension
+		target="org.nuxeo.ecm.platform.computedgroups.ComputedGroupsServiceImpl"
+		point="computerChain">
 
-    <groupComputerChain>
-      <computers>
-        <computer>affiliationGroupComputer</computer>
-      </computers>
-    </groupComputerChain>
+		<groupComputerChain>
+			<computers>
+				<computer>affiliationGroupComputer</computer>
+			</computers>
+		</groupComputerChain>
 
-  </extension>
+	</extension>
 
 </component>

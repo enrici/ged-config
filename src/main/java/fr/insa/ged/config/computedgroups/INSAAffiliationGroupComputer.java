@@ -3,13 +3,10 @@ package fr.insa.ged.config.computedgroups;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.DocumentModelList;
 import org.nuxeo.ecm.platform.computedgroups.AbstractGroupComputer;
 import org.nuxeo.ecm.platform.computedgroups.GroupComputer;
 import org.nuxeo.ecm.platform.usermanager.NuxeoPrincipalImpl;
@@ -47,25 +44,28 @@ public class INSAAffiliationGroupComputer extends AbstractGroupComputer {
 
         List<String> memberIds = new ArrayList<String>();
 
-        if (ETUDIANTS_GROUP_NAME.equals(groupName)) {
-            Map<String, Serializable> filter = new HashMap<String, Serializable>();
-            filter.put(getAttributeForGroupComputation(),
-                    ETUDIANTS_EDU_PERSON_AFFILIATION);
-            DocumentModelList users = getUM().searchUsers(filter, null);
-            for (DocumentModel user : users) {
-                memberIds.add(user.getId());
-            }
-        } else if (PERSONNELS_GROUP_NAME.equals(groupName)) {
-            for (String eduPersonAffiliation : PERSONNELS_EDU_PERSON_AFFILIATION) {
-                Map<String, Serializable> filter = new HashMap<String, Serializable>();
-                filter.put(getAttributeForGroupComputation(),
-                        eduPersonAffiliation);
-                DocumentModelList users = getUM().searchUsers(filter, null);
-                for (DocumentModel user : users) {
-                    memberIds.add(user.getId());
-                }
-            }
-        }
+        // if (ETUDIANTS_GROUP_NAME.equals(groupName)) {
+        // Map<String, Serializable> filter = new HashMap<String,
+        // Serializable>();
+        // filter.put(getAttributeForGroupComputation(),
+        // ETUDIANTS_EDU_PERSON_AFFILIATION);
+        // DocumentModelList users = getUM().searchUsers(filter, null);
+        // for (DocumentModel user : users) {
+        // memberIds.add(user.getId());
+        // }
+        // } else if (PERSONNELS_GROUP_NAME.equals(groupName)) {
+        // for (String eduPersonAffiliation : PERSONNELS_EDU_PERSON_AFFILIATION)
+        // {
+        // Map<String, Serializable> filter = new HashMap<String,
+        // Serializable>();
+        // filter.put(getAttributeForGroupComputation(),
+        // eduPersonAffiliation);
+        // DocumentModelList users = getUM().searchUsers(filter, null);
+        // for (DocumentModel user : users) {
+        // memberIds.add(user.getId());
+        // }
+        // }
+        // }
 
         return memberIds;
     }
