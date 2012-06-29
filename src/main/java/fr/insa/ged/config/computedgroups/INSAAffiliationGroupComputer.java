@@ -74,13 +74,19 @@ public class INSAAffiliationGroupComputer extends AbstractGroupComputer {
             throws Exception {
         List<String> grpNames = new ArrayList<String>();
 
-        String property = (String) nuxeoPrincipal.getModel().getProperty(
+        @SuppressWarnings("unchecked")
+        List<String> property = (List<String>) nuxeoPrincipal.getModel().getProperty(
                 getUM().getUserSchemaName(), getAttributeForGroupComputation());
-        if (ETUDIANTS_EDU_PERSON_AFFILIATION.equals(property)) {
+
+        for (String userGroup : property) {
+            if (Arrays.asList(PERSONNELS_EDU_PERSON_AFFILIATION).contains(
+                    userGroup)) {
+                grpNames.add(PERSONNELS_GROUP_NAME);
+            }
+        }
+
+        if (property.contains(ETUDIANTS_EDU_PERSON_AFFILIATION)) {
             grpNames.add(ETUDIANTS_GROUP_NAME);
-        } else if (Arrays.asList(PERSONNELS_EDU_PERSON_AFFILIATION).contains(
-                property)) {
-            grpNames.add(PERSONNELS_GROUP_NAME);
         }
 
         return grpNames;

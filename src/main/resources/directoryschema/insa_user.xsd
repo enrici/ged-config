@@ -14,7 +14,7 @@
   <xs:element name="email" type="xs:string" />
   
   <!-- champs specifiques -->
-  <xs:element name="eduPersonAffiliation" type="xs:string" />
+  <xs:element name="eduPersonAffiliation" type="nxs:stringList" />
 
   <!-- inverse reference -->
   <xs:element name="groups" type="nxs:stringList" />
