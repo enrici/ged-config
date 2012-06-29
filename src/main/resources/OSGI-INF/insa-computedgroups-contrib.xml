@@ -6,6 +6,9 @@
     point="computer">
 
     <groupComputer name="affiliationGroupComputer">
+      <allowOverride>true</allowOverride>
+      <cacheEnable>true</cacheEnable>
+	  <cacheTimeout>120</cacheTimeout>
       <computer>fr.insa.ged.config.computedgroups.INSAAffiliationGroupComputer
       </computer>
     </groupComputer>

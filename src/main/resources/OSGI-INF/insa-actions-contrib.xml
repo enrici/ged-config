@@ -1,19 +1,31 @@
 <?xml version="1.0"?>
 <component name="fr.insa.ged.config.actions">
-	
-  <require>org.nuxeo.ecm.platform.actions</require>
-  <require>org.nuxeo.ecm.user.center.actions</require>
-  <require>org.nuxeo.ecm.user.center.oauth.actions</require>
-  <require>org.nuxeo.ecm.user.center.profile.actions</require>
-	
-  <!-- Suppression de l acces a l espace Personnel et restrictions d acces 
+
+	<require>org.nuxeo.ecm.platform.actions</require>
+	<require>org.nuxeo.ecm.user.center.actions</require>
+	<require>org.nuxeo.ecm.user.center.oauth.actions</require>
+	<require>org.nuxeo.ecm.user.center.profile.actions</require>
+
+	<!-- Suppression de l acces a l espace Personnel et restrictions d acces 
 		a l espace Home -->
 	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
 		point="actions">
 		<!-- creation d'un nouvel onglet "visualiser" -->
-		<action id="TAB_VISU" link="/incl/tabs/documents_visu.xhtml" order="-1" label="action.tab.visu">
+		<action id="TAB_VISU" link="/incl/tabs/documents_visu.xhtml"
+			order="1" label="action.tab.visu">
 			<category>VIEW_ACTION_LIST</category>
 			<filter-id>documents_visu</filter-id>
+		</action>
+		<!-- onglet "Résumé" pour les documents des workspaces -->
+		<action id="TAB_VIEW">
+			<filter-id>notPublishedDocument</filter-id>
+		</action>
+		<!-- onglet "Résumé" pour les sections de publication -->
+		<action id="TAB_VIEW_PUBLISHED" link="/incl/tabs/document_view.xhtml"
+			order="5" label="action.view.summary" icon="/icons/file.gif">
+			<category>VIEW_ACTION_LIST</category>
+			<filter-id>view</filter-id>
+			<filter-id>publishedDocument</filter-id>
 		</action>
 		<!-- affiche ou pas l'onglet "modifier" -->
 		<action id="TAB_EDIT">
@@ -55,12 +67,8 @@
 		<action id="TAB_CONTENT_HISTORY">
 			<filter-id>only_for_manager</filter-id>
 		</action>
-		<!-- 
-		<action id="TAB_PUBLISH">
-			<filter-id>documents_visu</filter-id>
-			<filter-id>documents_approved</filter-id>
-		</action>
-		 -->
+		<!-- <action id="TAB_PUBLISH"> <filter-id>documents_visu</filter-id> <filter-id>documents_approved</filter-id> 
+			</action> -->
 		<action id="TAB_CONTENT_JBPM">
 			<filter-id>only_for_manager</filter-id>
 		</action>
@@ -86,12 +94,14 @@
 		</filter>
 		<filter id="documents_edit">
 			<rule grant="false">
-				<condition>#{currentDocument.currentLifeCycleState == 'approved'}</condition>
+				<condition>#{currentDocument.currentLifeCycleState == 'approved'}
+				</condition>
 			</rule>
 		</filter>
 		<filter id="documents_approved">
 			<rule grant="false">
-				<condition>#{currentDocument.currentLifeCycleState != 'approved'}</condition>
+				<condition>#{currentDocument.currentLifeCycleState != 'approved'}
+				</condition>
 			</rule>
 		</filter>
 		<filter id="view_section_buttons">
@@ -99,6 +109,16 @@
 				<type>DomainCollaborative</type>
 				<type>DomainPublication</type>
 				<type>Section</type>
+			</rule>
+		</filter>
+		<filter id="publishedDocument">
+			<rule grant="true">
+				<condition>document.isProxy()</condition>
+			</rule>
+		</filter>
+		<filter id="notPublishedDocument">
+			<rule grant="true">
+				<condition>!document.isProxy()</condition>
 			</rule>
 		</filter>
 	</extension>
