@@ -2,6 +2,8 @@
 <component name="fr.insa.ged.config.actions">
 
 	<require>org.nuxeo.ecm.platform.actions</require>
+	<require>org.nuxeo.ecm.webapp.seam.debug.action</require>
+	<require>org.nuxeo.ecm.platform.io.web</require>
 	<require>org.nuxeo.ecm.user.center.actions</require>
 	<require>org.nuxeo.ecm.user.center.oauth.actions</require>
 	<require>org.nuxeo.ecm.user.center.profile.actions</require>
@@ -10,6 +12,15 @@
 		a l espace Home -->
 	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
 		point="actions">
+		
+	<!-- Vue d'export -->
+    <action id="exportView" link="export" order="20" label="label.exportview" icon="/icons/export.png" enabled="false" />		
+		
+	<!-- Envoi mail -->
+	<action enabled="false" icon="/icons/mail.gif" id="sendNotificationEmail" label="action.email.document" link="send_notification_email" order="17">
+      <category>DOCUMENT_UPPER_ACTION</category>
+    </action>
+    
 		<!-- creation d'un nouvel onglet "visualiser" -->
 		<action id="TAB_VISU" link="/incl/tabs/documents_visu.xhtml"
 			order="1" label="action.tab.visu">
@@ -28,10 +39,11 @@
 			<filter-id>publishedDocument</filter-id>
 		</action>
 		<!-- affiche ou pas l'onglet "modifier" -->
+		<!--
 		<action id="TAB_EDIT">
-			<filter-id>documents_visu</filter-id>
-			<filter-id>documents_edit</filter-id>
+			<filter-id>contrib_restricted_access</filter-id>
 		</action>
+		-->
 		<!-- Suppression acces espace personnel -->
 		<action id="SHOW_PERSONAL_WORKSPACE" enabled="false" />
 		<!-- Suppression de l'onglet Applications autorisées situe dans le dashboard 
@@ -47,26 +59,34 @@
 		<action icon="/icons/dashboard.png" id="Dashboard" label="user.center.dashboard"
 			link="user_center_fragment.xhtml" order="10">
 			<category>USER_CENTER</category>
-			<!-- filtre d'activation initial -->
-			<filter-id>not_readonly</filter-id>
-
-			<!-- L'onglet ne sera pas affiche pour l'utilisateur anonyme -->
+			
+			
 			<filter-id>not_anonymous</filter-id>
-
+			<!-- filtre d'activation initial -->
+			<!-- 
+			<filter-id>not_readonly</filter-id>
+			 -->
+			<!-- L'onglet ne sera pas affiche pour l'utilisateur anonyme -->
+			<!--
+			<filter-id>not_anonymous</filter-id>
+			-->
 			<!-- Filtre de restriction personnalise -->
+			<!-- 
 			<filter id="users_group_home_restricted_access">
-				<!-- Affichage si l'utilisateur fait partie du groupe XXX -->
 				<rule grant="true">
 					<condition>#{userSession.currentNuxeoPrincipal.allGroups.contains("ged_admin")}
 					</condition>
 				</rule>
 			</filter>
+			 -->
 		</action>
 
 		<!-- Suppression des onglets Historique Publication Workflow pour les members -->
+		<!-- 
 		<action id="TAB_CONTENT_HISTORY">
 			<filter-id>only_for_manager</filter-id>
 		</action>
+		 -->
 		<!-- <action id="TAB_PUBLISH"> <filter-id>documents_visu</filter-id> <filter-id>documents_approved</filter-id> 
 			</action> -->
 		<action id="TAB_CONTENT_JBPM">
@@ -75,14 +95,25 @@
 
 		<!-- On grise le bouton Copier et on enleve le bouter Ajouter a la selection 
 			pour les members -->
+		
 		<action id="CURRENT_SELECTION_ADDTOLIST" enabled="false">
 			<filter-id>only_for_manager</filter-id>
 		</action>
+		<!-- 
+		<action id="CURRENT_SELECTION_DELETE" enabled="false">
+			<filter-id>contrib_restricted_access</filter-id>
+		</action>
+		 -->
+		<!-- 
 		<action id="CURRENT_SELECTION_COPY">
 			<filter-id>view_section_buttons</filter-id>
 		</action>
+		 -->
 
-
+		<action id="addCurrentDocumentToWorklist" enabled="false" link="#{operationActionBean.doOperation('addCurrentDocumentToWorklist')}" order="0" label="help.command.clipboard.addworklist" icon="/icons/action_add.gif" immediate="true">
+			<category>DOCUMENT_SUMMARY_CUSTOM_ACTIONS</category>
+	    </action>
+    
 	</extension>
 
 	<extension target="org.nuxeo.ecm.platform.actions.ActionService"
@@ -106,8 +137,6 @@
 		</filter>
 		<filter id="view_section_buttons">
 			<rule grant="false">
-				<type>DomainCollaborative</type>
-				<type>DomainPublication</type>
 				<type>Section</type>
 			</rule>
 		</filter>
@@ -119,6 +148,14 @@
 		<filter id="notPublishedDocument">
 			<rule grant="true">
 				<condition>!document.isProxy()</condition>
+			</rule>
+		</filter>
+		<filter id="contrib_restricted_access">
+			<rule grant="true">
+				<condition>#{userSession.currentNuxeoPrincipal.allGroups.contains("ged_admin")}
+				</condition>
+				<condition>#{currentDocument.type == 'File'}
+				</condition>
 			</rule>
 		</filter>
 	</extension>

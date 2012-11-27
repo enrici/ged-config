@@ -17,3 +17,6 @@ a.fbook {background:transparent url(/nuxeo/icons/facebook.png) no-repeat left to
 a.youtube {background:transparent url(/nuxeo/icons/you_tube.png) no-repeat left top;display:inline-block;height:16px;margin:0 0.4em;width:16px;}
 
 .nxMainContainer .column .dropzone {display:none;}
+
+/*#saveFacetedSearchForm {display:none;}*/
+/*#CLIPBOARD_PASTE {display:none;}*/

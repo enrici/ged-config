@@ -8,9 +8,10 @@
 		<directoryTree name="byCoverageNavigation" enabled="false" />
 	</extension>
 
-	<!-- Suppression de la navigation par tag -->
+	<!-- Suppression de la navigation par tag et search -->
 	<extension target="org.nuxeo.ecm.platform.virtualnavigation.NavTreeService"
 		point="navigationTree">
 		<navTree treeId="TAG_CLOUD" enabled="false" />
+		<!-- <navTree treeId="facetedSearch" enabled="false" /> -->
 	</extension>
 </component>
