@@ -15,4 +15,5 @@ Nuxeo-Component: OSGI-INF/insa-navtree-contrib.xml,
  OSGI-INF/insa-theme-contrib.xml,
  OSGI-INF/insa-publisher-contrib.xml,
  OSGI-INF/insa-directory-types-contrib.xml,
- OSGI-INF/insa-computedgroups-contrib.xml
+ OSGI-INF/insa-computedgroups-contrib.xml,
+ OSGI-INF/insa-pageproviders-contrib.xml
