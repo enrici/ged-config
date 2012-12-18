@@ -2,7 +2,8 @@
 <fragment version="1">
 
   <require>org.nuxeo.ecm.platform.lang</require>
-  <required>overriden.contribution</required>
+  <require>overriden.contribution</require>
+  <require>studio.extensions.insa-toulouse</require>
 
 
   <install>
