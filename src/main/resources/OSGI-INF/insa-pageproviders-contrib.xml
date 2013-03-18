@@ -20,6 +20,17 @@
       <pageSize>5</pageSize>
     </coreQueryPageProvider>
 
+<!-- POUR RECRUTEMENT -->
+    <coreQueryPageProvider name="user_workspaces">
+      <pattern>
+        SELECT * FROM Workspace WHERE ecm:mixinType != 'HiddenInNavigation' AND
+        ecm:currentLifeCycleState != 'deleted' AND ecm:isProxy = 0 AND ecm:path
+        STARTSWITH ? AND NOT ecm:path STARTSWITH ? ORDER BY dc:creator
+      </pattern>
+    </coreQueryPageProvider>
+<!-- POUR RECRUTEMENT -->
+
+
   </extension>
 
 </component>
